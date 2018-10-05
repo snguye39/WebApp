@@ -6,9 +6,18 @@
 </p>
 
 <p>
-  <strong>Id:</strong>
-  <%= @student.id %>
+  <strong>Student:</strong>
+  <%= @student.student_id %>
 </p>
 
+<p>
+  <strong>Classes:</strong>
+  <ul>
+    <% @student.sections.each do |section| %>
+    <%= section.course.name %>
+    <li><%= section.number %></li>
+    <% end %>
+  </ul>
+</p>
 <%= link_to 'Edit', edit_student_path(@student) %> |
 <%= link_to 'Back', students_path %>

@@ -28,10 +28,17 @@
 
   <div class="field">
     <%= form.label :course_id %>
-    <%= form.text_field :course_id %>
+    <%= form.collection_select(:course_id, Course.all, :id, :name) %>
+  </div>
+
+  <div class="field">
+    <%= form.label :student %>
+    <%= form.collection_check_boxes(:students, @students, :id, :name) %>
   </div>
 
   <div class="actions">
     <%= form.submit %>
   </div>
+
+  
 <% end %>

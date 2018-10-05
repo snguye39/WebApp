@@ -15,10 +15,14 @@ class SectionsController < ApplicationController
   # GET /sections/new
   def new
     @section = Section.new
+    @courses = Course.all
+    @students = Student.all  
   end
 
   # GET /sections/1/edit
   def edit
+    @students = Student.all
+    @courses = Course.all
   end
 
   # POST /sections
@@ -61,6 +65,11 @@ class SectionsController < ApplicationController
     end
   end
 
+  def search
+    @courses = Course.where("name like ?", "%#{params[:query]}%")
+    render :index
+  end
+  
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_section
@@ -69,6 +78,6 @@ class SectionsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def section_params
-      params.require(:section).permit(:semester, :number, :room, :course_id)
+      params.require(:section).permit(:semester, :number, :room, :course_id, :student_ids =>[])
     end
 end
