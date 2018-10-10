@@ -23,7 +23,7 @@
 
   <div class="field">
     <%= form.label :section_Number %>
-    <%= form.collection_check_boxes(:section_ids, @sections, :id, :number) %>
+    <%= form.collection_check_boxes(:section_ids, Section.all, :id, :number) %>
   </div>
 
   <div class="actions">

@@ -25,7 +25,6 @@ class CoursesController < ApplicationController
   # POST /courses.json
   def create
     @course = Course.new(course_params)
-
     respond_to do |format|
       if @course.save
         format.html { redirect_to @course, notice: 'Course was successfully created.' }
@@ -59,6 +58,11 @@ class CoursesController < ApplicationController
       format.html { redirect_to courses_url, notice: 'Course was successfully destroyed.' }
       format.json { head :no_content }
     end
+  end
+
+  def search
+    @courses = Course.where("name like ?", "%#{params[:query]}%")
+    render :index
   end
 
   private

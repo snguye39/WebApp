@@ -15,10 +15,12 @@ class StudentsController < ApplicationController
   # GET /students/new
   def new
     @student = Student.new
+    @sections = Section.all
   end
 
   # GET /students/1/edit
   def edit
+    @sections = Section.all
   end
 
   # POST /students
@@ -61,6 +63,11 @@ class StudentsController < ApplicationController
     end
   end
 
+  def search
+    @students = Student.where("name like ?", "%#{params[:query]}%")
+    render :index
+  end
+
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_student
@@ -69,6 +76,6 @@ class StudentsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def student_params
-      params.require(:student).permit(:name, :section_ids => [])
+      params.require(:student).permit(:name, :student_id, :section_ids => [])
     end
 end
